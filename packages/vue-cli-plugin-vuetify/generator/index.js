@@ -1,7 +1,7 @@
 module.exports = (api, opts) => {
   const { fileExists } = require('../util/helpers')
   const alaCarte = require('./tools/alaCarte')
-  const fonts = require('./tools/fonts')
+  // const fonts = require('./tools/fonts')
   const polyfill = require('./tools/polyfill')
   const vite = require('./tools/vite')
   const vuetify = require('./tools/vuetify')
@@ -20,7 +20,7 @@ module.exports = (api, opts) => {
   // Must be before dependencies because of weird bug
   if (!opts.useV3) vuetify.addImports(api)
   if (!opts.useAlaCarte && opts.usePolyfill) polyfill.addImports(api)
-  if (opts.installFonts) opts.useV3 ? fonts.addPlugin(api, opts) : fonts.addImports(api, opts.iconFont)
+  // if (opts.installFonts) opts.useV3 ? fonts.addPlugin(api, opts) : fonts.addImports(api, opts.iconFont)
 
   // Add dependencies
   vuetify.addDependencies(api, opts)
@@ -33,7 +33,7 @@ module.exports = (api, opts) => {
     vite.renderFiles(api, opts)
   }
 
-  if (opts.installFonts) fonts.addDependencies(api, opts.iconFont)
+  // if (opts.installFonts) fonts.addDependencies(api, opts.iconFont)
 
   // Update vue.config.js for transpileDependency if AlaCarte
   if (opts.useAlaCarte && !opts.useVite) alaCarte.addVueConfigVuetify(api, opts.useV3)
@@ -48,7 +48,7 @@ module.exports = (api, opts) => {
       polyfill.updateBrowsersList(api)
     }
 
-    if (!opts.installFonts) fonts.addLinks(api, opts.iconFont)
+    // if (!opts.installFonts) fonts.addLinks(api, opts.iconFont)
     vuetify.setHtmlLang(api, opts.locale)
 
     if (fileExists(api, './public/index.html') && opts.useVite) {
